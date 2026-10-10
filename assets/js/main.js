@@ -131,6 +131,27 @@
     }).join('');
   }
 
+  function renderCertifications() {
+    var el = $('[data-render="certifications"]');
+    if (!el) return;
+    var list = toArray(data.certifications);
+    var section = el.closest('section');
+    if (!list.length) {
+      if (section) section.hidden = true;
+      return;
+    }
+    el.innerHTML = list.map(function (c) {
+      var url = safeUrl(c.verify);
+      return '<li class="cert">' +
+        '<p class="cert__issuer">' + esc(c.issuer) + '</p>' +
+        '<h3 class="cert__name">' + esc(c.name) + '</h3>' +
+        (c.detail ? '<p class="cert__detail">' + esc(c.detail) + '</p>' : '') +
+        (c.date ? '<p class="cert__date">' + esc(c.date) + '</p>' : '') +
+        (url ? '<a class="cert__verify" href="' + esc(url) + '" target="_blank" rel="noopener">Verify credential</a>' : '') +
+        '</li>';
+    }).join('');
+  }
+
   function cardHtml(p) {
     var tags = toArray(p.tags).map(function (t) { return String(t).toLowerCase(); });
     var links = '';
@@ -368,6 +389,7 @@
     safe(renderSocials);
     safe(renderAbout);
     safe(renderSkills);
+    safe(renderCertifications);
     safe(function () {
       var projects = toArray(data.projects);
       renderProjects(projects);

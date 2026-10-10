@@ -727,6 +727,66 @@ section[id],
   }
 }
 
+/* ---------- Certifications ---------- */
+.certs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+}
+
+.cert {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+  transition: border-color var(--t), transform var(--t), box-shadow var(--t), background-color var(--t);
+}
+
+.cert:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.cert__issuer,
+.cert__date {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+.cert__date { color: var(--text-muted); }
+
+.cert__name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.cert__detail {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.cert__verify {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
 /* ---------- Skills ---------- */
 .skills {
   display: grid;
@@ -1208,6 +1268,7 @@ section[id],
   .card:hover,
   .card:focus-within,
   .skill-group:hover,
+  .cert:hover,
   .socials__link:hover,
   .back-to-top.is-visible:hover {
     transform: none;

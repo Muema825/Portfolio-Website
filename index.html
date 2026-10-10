@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ian Muema — Software Developer</title>
-  <meta name="description" content="Ian Muema — software developer building fast, accessible web applications. Projects, skills, experience and contact.">
+  <title>Ian Muema — Cybersecurity &amp; Full-Stack Developer</title>
+  <meta name="description" content="Ian Muema — CompTIA Security+ and CCNA certified ICT professional building and securing web systems. Projects, certifications, experience and contact.">
   <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0b1416" media="(prefers-color-scheme: dark)">
-  <meta property="og:title" content="Ian Muema — Software Developer">
-  <meta property="og:description" content="Software developer building fast, accessible web applications. See my projects, skills and experience.">
+  <meta property="og:title" content="Ian Muema — Cybersecurity &amp; Full-Stack Developer">
+  <meta property="og:description" content="Security-minded full-stack developer: vulnerability assessment, secure code review and web systems built to be trusted.">
   <meta property="og:type" content="website">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}})();</script>
@@ -27,6 +27,7 @@
       <ul class="nav__menu" id="nav-menu">
         <li><a class="nav__link" href="#about">About</a></li>
         <li><a class="nav__link" href="#skills">Skills</a></li>
+        <li><a class="nav__link" href="#certifications">Certs</a></li>
         <li><a class="nav__link" href="#projects">Projects</a></li>
         <li><a class="nav__link" href="#experience">Experience</a></li>
         <li><a class="nav__link" href="#contact">Contact</a></li>
@@ -47,7 +48,7 @@
     <section class="hero container" id="hero">
       <p class="hero__eyebrow">Hi, I'm</p>
       <h1 class="hero__title" data-bind="name">Ian Muema</h1>
-      <p class="hero__role" data-bind="role">Software Developer</p>
+      <p class="hero__role" data-bind="role">Cybersecurity &amp; Full-Stack Developer</p>
       <p class="hero__tagline" data-bind="tagline">I build fast, accessible and well-crafted web applications, from clean interfaces to reliable back-end services.</p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="#projects">View my work</a>
@@ -77,9 +78,16 @@
       </div>
     </section>
 
-    <section class="section" id="projects">
+    <section class="section" id="certifications">
       <div class="container">
-        <h2 class="section__title reveal"><span class="section__num">03.</span> Projects</h2>
+        <h2 class="section__title reveal"><span class="section__num">03.</span> Certifications</h2>
+        <ul class="certs reveal" data-render="certifications"></ul>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="projects">
+      <div class="container">
+        <h2 class="section__title reveal"><span class="section__num">04.</span> Projects</h2>
         <div class="reveal">
           <div class="filters" data-render="filters" role="toolbar" aria-label="Filter projects"></div>
           <div class="projects" data-render="projects">
@@ -90,16 +98,16 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="experience">
+    <section class="section" id="experience">
       <div class="container">
-        <h2 class="section__title reveal"><span class="section__num">04.</span> Experience</h2>
+        <h2 class="section__title reveal"><span class="section__num">05.</span> Experience</h2>
         <ol class="timeline reveal" data-render="experience"></ol>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section section--alt" id="contact">
       <div class="container">
-        <h2 class="section__title reveal"><span class="section__num">05.</span> Contact</h2>
+        <h2 class="section__title reveal"><span class="section__num">06.</span> Contact</h2>
         <div class="contact reveal">
           <p class="contact__text">I'm currently open to new opportunities and collaborations. Whether you have a question, a project in mind or just want to say hi, my inbox is always open.</p>
           <a class="btn btn--primary" href="mailto:you@example.com" data-bind-href="mailto">Say hello</a>
