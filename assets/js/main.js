@@ -30,6 +30,7 @@
     return /^(https?:|mailto:)/i.test(u) ? u : '';
   }
 
+  var ACRONYMS = ['ml', 'ai', 'api', 'ui', 'ux', 'iot'];
   function toArray(v) { return Array.isArray(v) ? v : []; }
 
   function svg(paths, extraClass) {
@@ -196,7 +197,7 @@
     bar.hidden = false;
     bar.innerHTML = '<button class="filter is-active" data-filter="all" aria-pressed="true">All</button>' +
       tags.map(function (t) {
-        var label = t.length <= 3 ? t.toUpperCase() : t.charAt(0).toUpperCase() + t.slice(1);
+        var label = ACRONYMS.indexOf(t) !== -1 ? t.toUpperCase() : t.charAt(0).toUpperCase() + t.slice(1);
         return '<button class="filter" data-filter="' + esc(t) + '" aria-pressed="false">' + esc(label) + '</button>';
       }).join('');
   }
