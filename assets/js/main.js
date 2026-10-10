@@ -43,9 +43,7 @@
     github: '<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>',
     linkedin: '<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/>',
     twitter: '<path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/>',
-    email: '<path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5-8-5V6l8 5 8-5v2.24z"/>',
-    folder: '<path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/>',
-    external: '<path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>'
+    email: '<path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5-8-5V6l8 5 8-5v2.24z"/>'
   };
 
   var SOCIAL_LABELS = { github: 'GitHub', linkedin: 'LinkedIn', twitter: 'X (Twitter)', email: 'Email' };
@@ -70,6 +68,8 @@
       initials: data.initials,
       role: data.role,
       tagline: data.tagline,
+      location: data.location,
+      availability: data.availability,
       email: data.email,
       year: String(new Date().getFullYear())
     };
@@ -92,6 +92,13 @@
         el.hidden = true;
       }
     });
+
+    if (data.availability === '') $$('.status').forEach(function (el) { el.hidden = true; });
+    if (data.location === '') $$('.hero__meta').forEach(function (el) { el.hidden = true; });
+    if (data.photo) {
+      $$('.hero__photo, .nav__avatar').forEach(function (img) { img.setAttribute('src', data.photo); });
+    }
+    if (data.name) $$('.hero__photo').forEach(function (img) { img.setAttribute('alt', 'Portrait of ' + data.name); });
 
     if (data.name && data.role) document.title = data.name + ' — ' + data.role;
   }
@@ -125,10 +132,10 @@
     var el = $('[data-render="skills"]');
     if (!el) return;
     el.innerHTML = toArray(data.skills).map(function (g) {
-      return '<div class="skill-group"><h3 class="skill-group__title">' + esc(g.group) + '</h3>' +
-        '<ul class="tags">' + toArray(g.items).map(function (i) {
+      return '<div><dt>' + esc(g.group) + '</dt>' +
+        '<dd><ul class="tags">' + toArray(g.items).map(function (i) {
           return '<li class="tag">' + esc(i) + '</li>';
-        }).join('') + '</ul></div>';
+        }).join('') + '</ul></dd></div>';
     }).join('');
   }
 
@@ -143,12 +150,11 @@
     }
     el.innerHTML = list.map(function (c) {
       var url = safeUrl(c.verify);
-      return '<li class="cert">' +
-        '<p class="cert__issuer">' + esc(c.issuer) + '</p>' +
-        '<h3 class="cert__name">' + esc(c.name) + '</h3>' +
-        (c.detail ? '<p class="cert__detail">' + esc(c.detail) + '</p>' : '') +
-        (c.date ? '<p class="cert__date">' + esc(c.date) + '</p>' : '') +
-        (url ? '<a class="cert__verify" href="' + esc(url) + '" target="_blank" rel="noopener">Verify credential</a>' : '') +
+      return '<li>' +
+        '<div class="row__head"><h3 class="row__title">' + esc(c.name) + '</h3>' +
+        (c.date ? '<p class="row__date">' + esc(c.date) + '</p>' : '') + '</div>' +
+        '<p class="row__sub">' + esc(c.issuer) + (c.detail ? ' · ' + esc(c.detail) : '') + '</p>' +
+        (url ? '<a class="row__link" href="' + esc(url) + '" target="_blank" rel="noopener">Verify credential</a>' : '') +
         '</li>';
     }).join('');
   }
@@ -158,18 +164,18 @@
     var links = '';
     var repo = safeUrl(p.repo);
     var demo = safeUrl(p.demo);
+    var label = esc(p.title);
     if (repo) {
-      links += '<a class="card__link" aria-label="Source code" href="' + esc(repo) +
-        '" target="_blank" rel="noopener">' + svg(ICONS.github) + '</a>';
+      links += '<a class="card__link" aria-label="' + label + ' source code" href="' + esc(repo) +
+        '" target="_blank" rel="noopener">Code ↗</a>';
     }
     if (demo) {
-      links += '<a class="card__link" aria-label="Live demo" href="' + esc(demo) +
-        '" target="_blank" rel="noopener">' + svg(ICONS.external) + '</a>';
+      links += '<a class="card__link" aria-label="' + label + ' live site" href="' + esc(demo) +
+        '" target="_blank" rel="noopener">Live ↗</a>';
     }
     return '<article class="card" data-tags="' + esc(tags.join(' ')) + '">' +
-      '<div class="card__top">' + svg(ICONS.folder, 'card__icon') +
-      '<div class="card__links">' + links + '</div></div>' +
-      '<h3 class="card__title">' + esc(p.title) + '</h3>' +
+      '<div class="card__head"><h3 class="card__title">' + label + '</h3>' +
+      (links ? '<div class="card__links">' + links + '</div>' : '') + '</div>' +
       '<p class="card__desc">' + esc(p.description) + '</p>' +
       '<ul class="card__tech">' + toArray(p.tech).map(function (t) {
         return '<li>' + esc(t) + '</li>';
@@ -225,13 +231,14 @@
     var el = $('[data-render="experience"]');
     if (!el) return;
     el.innerHTML = toArray(data.experience).map(function (x) {
-      return '<li class="timeline__item"><div class="timeline__dot"></div><div class="timeline__content">' +
-        '<p class="timeline__date">' + esc(x.date) + '</p>' +
-        '<h3 class="timeline__role">' + esc(x.role) +
-        (x.org ? ' <span class="timeline__org">@ ' + esc(x.org) + '</span>' : '') + '</h3>' +
-        '<ul class="timeline__points">' + toArray(x.points).map(function (pt) {
+      var points = toArray(x.points);
+      return '<li>' +
+        '<div class="row__head"><h3 class="row__title">' + esc(x.role) + '</h3>' +
+        (x.date ? '<p class="row__date">' + esc(x.date) + '</p>' : '') + '</div>' +
+        (x.org ? '<p class="row__sub">' + esc(x.org) + '</p>' : '') +
+        (points.length ? '<ul class="row__points">' + points.map(function (pt) {
           return '<li>' + esc(pt) + '</li>';
-        }).join('') + '</ul></div></li>';
+        }).join('') + '</ul>' : '') + '</li>';
     }).join('');
   }
 
@@ -261,38 +268,6 @@
 
   /* ---------- behaviour ---------- */
 
-  function initNav() {
-    var toggle = $('.nav__toggle');
-    var menu = $('.nav__menu');
-    if (!toggle || !menu) return;
-
-    function setOpen(open) {
-      menu.classList.toggle('is-open', open);
-      document.body.classList.toggle('nav-open', open);
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    }
-
-    toggle.addEventListener('click', function () {
-      setOpen(!menu.classList.contains('is-open'));
-    });
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest && e.target.closest('a')) setOpen(false);
-    });
-    document.addEventListener('keydown', function (e) {
-      if ((e.key === 'Escape' || e.key === 'Esc') && menu.classList.contains('is-open')) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-    if (window.matchMedia) {
-      var mq = window.matchMedia('(min-width: 768px)');
-      var onChange = function (ev) { if (ev.matches) setOpen(false); };
-      if (mq.addEventListener) mq.addEventListener('change', onChange);
-      else if (mq.addListener) mq.addListener(onChange);
-    }
-  }
-
   function initTheme() {
     var btn = $('.theme-toggle');
     if (!btn) return;
@@ -311,29 +286,50 @@
     sync();
   }
 
-  function initScroll() {
-    var header = $('.site-header');
-    var backToTop = $('.back-to-top');
-    var ticking = false;
-
-    function update() {
-      ticking = false;
-      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-      if (header) header.classList.toggle('is-scrolled', y > 10);
-      if (backToTop) backToTop.classList.toggle('is-visible', y > 600);
+  function initCopyEmail() {
+    var buttons = $$('[data-copy-email]');
+    var toast = $('.toast');
+    if (!buttons.length) return;
+    if (!data.email) {
+      buttons.forEach(function (b) { b.hidden = true; });
+      return;
     }
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
-
-    if (backToTop) {
-      backToTop.addEventListener('click', function () {
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        try { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); }
-        catch (e) { window.scrollTo(0, 0); }
+    var timer;
+    function notify(msg) {
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('is-visible');
+      clearTimeout(timer);
+      timer = setTimeout(function () { toast.classList.remove('is-visible'); }, 2200);
+    }
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var email = data.email;
+        var done = function () { notify('Email copied: ' + email); };
+        var fail = function () {
+          if (fallbackCopy(email)) done();
+          else window.location.href = 'mailto:' + email;
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(done, fail);
+        } else {
+          fail();
+        }
       });
-    }
+    });
   }
 
   function initActiveLink() {
@@ -398,9 +394,8 @@
     });
     safe(initFilters);
     safe(renderExperience);
-    safe(initNav);
     safe(initTheme);
-    safe(initScroll);
+    safe(initCopyEmail);
     safe(initActiveLink);
     safe(initReveal);
   }

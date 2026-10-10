@@ -11,6 +11,9 @@
  *  - Project `tags` drive the filter buttons (e.g. "security", "web").
  *  - Leave `repo` or `demo` as "" to hide that link on a project card
  *    (private repositories have no public repo link).
+ *  - Set `availability` to "" to hide the "available" badge, and
+ *    `location` to "" to hide the location line.
+ *  - `photo` is the path to your portrait (a square image works best).
  *  - If `projects` is an empty array, main.js will try to show your latest
  *    public GitHub repositories instead.
  */
@@ -18,6 +21,9 @@ window.PORTFOLIO = {
   name: 'Ian Muema',
   initials: 'IM',
   role: 'Full-Stack Developer',
+  photo: 'assets/img/ian-muema.jpg',
+  location: 'Machakos, Kenya',
+  availability: 'Available for new projects',
   tagline: 'I build full-stack web and mobile platforms — from exam proctoring to fintech marketplaces — with security designed in from day one. CompTIA Security+ and CCNA certified.',
   email: 'muemaian484@gmail.com',
   githubUser: 'muema825',
