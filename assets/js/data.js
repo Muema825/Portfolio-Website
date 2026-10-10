@@ -17,8 +17,8 @@
 window.PORTFOLIO = {
   name: 'Ian Muema',
   initials: 'IM',
-  role: 'Cybersecurity & Full-Stack Developer',
-  tagline: 'CompTIA Security+ and CCNA certified. I build web systems and then try to break them — vulnerability assessment, secure code review and hardening for platforms people need to trust.',
+  role: 'Full-Stack Developer',
+  tagline: 'I build full-stack web and mobile platforms — from exam proctoring to fintech marketplaces — with security designed in from day one. CompTIA Security+ and CCNA certified.',
   email: 'muemaian484@gmail.com',
   githubUser: 'muema825',
 
@@ -29,16 +29,18 @@ window.PORTFOLIO = {
   },
 
   about: [
-    "I'm Ian, an ICT professional based in Machakos, Kenya, with a Bachelor of Business Information Technology (Business Intelligence) from Strathmore University. I'm a cybersecurity enthusiast who also builds the systems I'm protecting.",
-    'Across internships at Kwetu Sacco, Konza Technopolis Development Authority and the ICT Authority I have run vulnerability scans and penetration tests, reviewed code against the OWASP Top 10, built log monitoring to catch threats early, and documented and prioritised vulnerabilities for remediation.',
-    'On the development side I build full-stack platforms with security designed in from the start: server-enforced roles, rate limiting, tamper-evident audit logs, hashed secrets and strict security headers. I care about delivering secure, reliable ICT solutions for academic, financial and public-sector environments.'
+    "I'm Ian, a full-stack developer based in Machakos, Kenya, with a Bachelor of Business Information Technology (Business Intelligence) from Strathmore University. I build end-to-end products: Next.js and React front ends, TypeScript and Python back ends, PostgreSQL and Redis data layers, and Flutter and Kotlin mobile apps.",
+    'Recent work includes a remote exam proctoring platform for the Open University of Kenya, a gift-card marketplace and an agricultural investment platform with M-Pesa payments — shipped with tests, CI/CD and observability.',
+    "I'm also a cybersecurity enthusiast, and it shapes how I build: server-enforced roles, rate limiting, tamper-evident audit logs, hashed secrets and strict security headers. During internships at Kwetu Sacco, Konza Technopolis and the ICT Authority I ran vulnerability assessments, reviewed code against the OWASP Top 10 and built security log monitoring."
   ],
 
   skills: [
-    { group: 'Security', items: ['Vulnerability assessment', 'Penetration testing', 'OWASP Top 10', 'Secure code review', 'Log monitoring & SIEM', 'Threat analysis', 'Risk documentation'] },
-    { group: 'Networking & Cloud', items: ['Routing & switching', 'Network troubleshooting', 'AWS', 'Linux', 'Docker', 'Nginx & TLS', 'Prometheus & Grafana'] },
-    { group: 'Development', items: ['TypeScript', 'Python', 'Next.js', 'React', 'Django', 'Flask / FastAPI', 'PostgreSQL', 'Redis', 'Flutter', 'Kotlin', 'Solidity'] },
-    { group: 'Data & AI', items: ['pandas', 'scikit-learn', 'NLP', 'Azure AI', 'Data governance', 'Data quality'] }
+    { group: 'Frontend', items: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'HTML & CSS', 'Accessibility'] },
+    { group: 'Backend & Data', items: ['Node.js', 'Python', 'Django', 'Flask / FastAPI', 'PostgreSQL', 'Redis', 'Convex', 'REST APIs'] },
+    { group: 'Mobile & Web3', items: ['Flutter', 'Dart', 'Kotlin', 'Android', 'Solidity', 'Hardhat'] },
+    { group: 'DevOps & Cloud', items: ['Docker', 'GitHub Actions', 'Nginx', 'AWS', 'Cloudflare Workers', 'Linux', 'Prometheus & Grafana'] },
+    { group: 'Security', items: ['OWASP Top 10', 'Secure code review', 'Vulnerability assessment', 'Penetration testing', 'Auth & RBAC', 'Log monitoring'] },
+    { group: 'Data & AI', items: ['pandas', 'scikit-learn', 'NLP', 'Azure AI', 'Data governance'] }
   ],
 
   certifications: [
@@ -76,7 +78,7 @@ window.PORTFOLIO = {
     {
       title: 'OUK Exam Proctor',
       description: 'Self-hosted remote exam proctoring for the Open University of Kenya. Face verification, live camera/mic supervision and browser anti-cheat signals, with server-enforced roles, Redis rate limiting, scrypt password hashing, security headers and a hash-chained, tamper-evident audit log (NIST 800-92).',
-      tags: ['security', 'web'],
+      tags: ['web', 'security'],
       tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Redis', 'LiveKit', 'DeepFace', 'Nginx', 'Grafana'],
       repo: '',
       demo: ''
@@ -84,7 +86,7 @@ window.PORTFOLIO = {
     {
       title: 'ZawaDigital Gift Cards',
       description: 'Gift-card marketplace for local businesses with buyer, merchant and admin roles. Redemption codes are HMAC-derived and stored only as bcrypt hashes; adds CSP with violation reporting, HSTS, rate limiting, idle-session timeouts, OTP merchant onboarding and an admin audit trail.',
-      tags: ['security', 'web', 'fintech'],
+      tags: ['web', 'fintech', 'security'],
       tech: ['Next.js', 'TypeScript', 'Convex', 'Better Auth', 'M-Pesa', 'Cloudflare Workers'],
       repo: '',
       demo: 'https://zawadigital.co'
@@ -92,7 +94,7 @@ window.PORTFOLIO = {
     {
       title: 'Tajiri Shambani',
       description: 'Agricultural investment platform connecting farmers and investors, with a marketplace and M-Pesa checkout. Email-verified auth, per-route rate limits, hardened session cookies, server-side role checks following OWASP guidance and open-redirect protection.',
-      tags: ['security', 'web', 'fintech'],
+      tags: ['web', 'fintech', 'security'],
       tech: ['Next.js', 'TypeScript', 'better-auth', 'PostgreSQL', 'Upstash Redis', 'Zod'],
       repo: '',
       demo: ''
